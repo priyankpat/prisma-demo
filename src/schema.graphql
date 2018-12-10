@@ -1,0 +1,27 @@
+scalar DateTime
+
+type Query {
+  review(id: ID!): Review
+}
+
+type Mutation {
+  createUser(email: String!, name: String, fibauid: String!): User!
+  createReview(title: String!, url: String!, userId: String!): Review!
+}
+
+type Review {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  url: String!
+  author: User!
+}
+
+type User {
+  id: ID!
+  fibauid: String!
+  email: String!
+  name: String!
+  reviews: [Review!]!
+}
