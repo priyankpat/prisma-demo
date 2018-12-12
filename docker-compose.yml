@@ -19,9 +19,9 @@ services:
     environment:
       PRISMA_CONFIG: |
         port: 4466
-        managementApiSecret: garnish-secret
+        managementApiSecret: {{SECRET}}
         databases:
           default:
             connector: mongo
-            uri: mongodb://mongo:27017/cater-db?streamType=netty
-            database: cater-db
+            uri: mongodb://mongo:27017/{{DB_NAME}}?streamType=netty
+            database: {{DB_NAME}}
