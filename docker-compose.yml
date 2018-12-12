@@ -1,0 +1,27 @@
+version: '3.7'
+volumes:
+  data: {}
+services:
+  mongo:
+    image: mongo:4
+    volumes:
+      - data:/tmp/data/db
+    command: mongod --smallfiles --port 27017
+    ports:
+    - "27017:27017"
+  prisma:
+    image: prismagraphql/prisma:1.22
+    depends_on:
+      - mongo
+    restart: always
+    ports:
+    - "4466:4466"
+    environment:
+      PRISMA_CONFIG: |
+        port: 4466
+        managementApiSecret: garnish-secret
+        databases:
+          default:
+            connector: mongo
+            uri: mongodb://mongo:27017/cater-db?streamType=netty
+            database: cater-db
